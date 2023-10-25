@@ -17,9 +17,17 @@ block_pick = 1
 window.fps_counter.enabled = False
 window.exit_button.visible = False
 
+initial_player_position = (10, 1, 10)  # Adjust the position as needed
+
+player = FirstPersonController(position=initial_player_position)
 
 def update():
     global block_pick
+    player_y = player.y
+
+    if player_y < -10:  # Check if the player falls below the threshold
+    # Tele  port the player back to the platform
+            player.position = initial_player_position
 
     if held_keys['right mouse'] or held_keys['left mouse']:
         hand.active()
