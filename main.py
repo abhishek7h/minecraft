@@ -1,8 +1,10 @@
 from asyncore import loop
 from ursina import *
+from ursina import Audio
 from ursina.prefabs.first_person_controller import FirstPersonController
 
 app = Ursina()
+audio = Audio()
 
 grass_texture = load_texture('assets/grass_block.png')
 stone_texture = load_texture('assets/stone_block.png')
@@ -10,6 +12,9 @@ brick_texture = load_texture('assets/brick_block.png')
 dirt_texture = load_texture('assets/dirt_block.png')
 sky_texture = load_texture('assets/skybox.png')
 arm_texture = load_texture('assets/arm_texture.png')
+
+# placing_sound = audio.create_sound('assets/block_place.wav')
+# breaking_sound = audio.create_sound('assets/bone_break.wav')
 
 
 block_pick = 1
@@ -27,7 +32,7 @@ def update():
     player_y = player.y
 
     if player_y < -35:  # Check if the player falls below the threshold
-    # Tele  port the player back to the platform
+    # Teleport the player back to the platform
             player.position = initial_player_position
 
     if held_keys['right mouse'] or held_keys['left mouse']:
@@ -104,6 +109,7 @@ class Hand(Entity):
 
     def passive(self):
         self.position = Vec2(0.4, -0.6)
+        
 
 
 for z in range(25):
