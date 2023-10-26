@@ -16,6 +16,7 @@ block_pick = 1
 
 window.fps_counter.enabled = False
 window.exit_button.visible = False
+window.fullscreen = True
 
 initial_player_position = (10, 1, 10)  # Adjust the position as needed
 
@@ -25,7 +26,7 @@ def update():
     global block_pick
     player_y = player.y
 
-    if player_y < -10:  # Check if the player falls below the threshold
+    if player_y < -35:  # Check if the player falls below the threshold
     # Tele  port the player back to the platform
             player.position = initial_player_position
 
@@ -105,10 +106,18 @@ class Hand(Entity):
         self.position = Vec2(0.4, -0.6)
 
 
-for z in range(20):
-    for x in range(20):
+for z in range(25):
+    for x in range(25):
         voxel = Voxel(position=(x, 0, z))
 
+# Define a function to close the window
+def close_window():
+    window.close()
+
+# Bind the function to a key press (e.g., press 'Esc' to close the window)
+def input(key):
+    if key == 'escape':
+        close_window()
 
 player = FirstPersonController()
 sky = Sky()
